@@ -1,1 +1,1 @@
-# investing
+# Investment research and analysis application
