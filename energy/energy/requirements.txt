@@ -1,1 +1,4 @@
 requests
+Scrapy
+eia-python
+energy-trading-api
