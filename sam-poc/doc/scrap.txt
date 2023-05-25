@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+  delta-lake:
+    image: delta-io/delta-lake
+    ports:
+      - "8080:8080"
+
+  apache-airflow:
+    image: apache/airflow:2.2.0
+    command: airflow init
+    environment:
+      - AIRFLOW_CONN_MONGODB_HOST=mongodb
+      - AIRFLOW_CONN_MONGODB_PORT=27017
+      - AIRFLOW_CONN_MONGODB_DATABASE=airflow
+      - AIRFLOW_CONN_MONGODB_USERNAME=airflow
+      - AIRFLOW_CONN_MONGODB_PASSWORD=airflow
+
+  mongodb:
+    image: mongo:4.4.2
+    ports:
+      - "27017:27017"
+
+  localstack:
+    image: localstack/localstack:0.12.8
+    ports:
+      - "4566:4566"
+      - "8080:8080"
+
+  azurite:
+    image: microsoft/azure-storage-azurite:latest
+    ports:
+      - "10000:10000"
+
+
+
+Once this Docker Compose file is up and running, you will be able to access the following services:
+
+Delta Lake: http://localhost:8080
+Apache Airflow: http://localhost:8080/admin
+MongoDB: mongodb://localhost:27017
+Localstack: http://localhost:4566
+Azurite: http://localhost:10000
+You can use these services to build a data lakehouse environment. For example, you could use Delta Lake to store data in a lakehouse format, Apache Airflow to orchestrate data pipelines, MongoDB to store data in a document-oriented database, Localstack to simulate AWS services, and Azurite to simulate Azure services.
